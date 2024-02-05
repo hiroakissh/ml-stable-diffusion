@@ -9,6 +9,7 @@ import StableDiffusion
 import UniformTypeIdentifiers
 import CoreImage
 import NaturalLanguage
+import UIKit
 
 @available(iOS 16.2, macOS 13.1, *)
 struct StableDiffusionSample: ParsableCommand {
@@ -214,8 +215,8 @@ struct StableDiffusionSample: ParsableCommand {
     func convertImageToCGImage(imageURL: URL) throws -> CGImage {
         let imageData = try Data(contentsOf: imageURL)
         guard
-            let nsImage = NSImage(data: imageData),
-            let loadedImage = nsImage.cgImage(forProposedRect: nil, context: nil, hints: nil)
+            let nsImage = UIImage(data: imageData),
+            let loadedImage = nsImage.cgImage
         else {
             throw RunError.resources("Image not available \(resourcePath)")
         }
